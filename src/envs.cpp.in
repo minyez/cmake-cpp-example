@@ -1,0 +1,3 @@
+#include "envs.hpp"
+
+const string source_dir = "${PROJECT_SOURCE_DIR}/src";

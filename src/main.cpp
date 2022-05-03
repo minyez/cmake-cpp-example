@@ -2,10 +2,14 @@
 #include <cstdlib>
 #include <ctime>
 #include "mymath.hpp"
+#include "envs.hpp"
+#include "constants.hpp"
 
 int main (int argc, char *argv[])
 {
     using namespace std;
+    cout << "Source code directory: " << source_dir << endl;
+    cout << "Version: " << _version << endl;
     cout << "Sum up to 10: " << sum(10) << endl;
     srand(time(0));
     const int DIM = 20;

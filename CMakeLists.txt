@@ -21,6 +21,10 @@ set(BUILD_LIBRARY ON)
 # Control whether the library will be built as a static or shared (dynamic) library
 set(BUILD_SHARED_LIBS ON)
 
+# Set C++ standard
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
+
 # WARN: trigger language after the CXX objects are configured.
 enable_language(CXX)
 

@@ -6,4 +6,4 @@ using std::string;
 //! version of this project
 extern const string _version;
 
-#endif
+#endif // CONSTANTS_H
