@@ -21,7 +21,7 @@ list(APPEND _sources
             constants.cpp
             mymath.cpp
             ${CMAKE_CURRENT_BINARY_DIR}/envs.cpp)
-# set include directories for LAPACK and BLAS
+# set include directories, required when external C/C++ codes are used in the project
 # target_include_directories(cmake_cpp_example_exe
 #   PUBLIC
 #     ${CMAKE_CURRENT_LIST_DIR}
@@ -33,6 +33,8 @@ if (BUILD_LIBRARY)
 # We assume that the main library does not contain the main function.
 # The sources will be added later.
   add_library(cmake_cpp_example_lib)
+# Link to BLAS and LAPACK libraries
+  target_link_libraries(cmake_cpp_example_lib ${LAPACK_LIBRARIES})
 # Also put the generated lib under the build root.
   set_target_properties(cmake_cpp_example_lib
     PROPERTIES
@@ -52,4 +54,6 @@ if (BUILD_LIBRARY)
 else()
   # if the library will not be built, then all sources should be added to the executable target
   target_sources(cmake_cpp_example_exe PRIVATE ${_sources})
+  # And link to BLAS/LAPACK
+  target_link_libraries(cmake_cpp_example_exe ${LAPACK_LIBRARIES})
 endif()
