@@ -58,6 +58,6 @@ _deps
 build
 .cmake
 
-docs
-!docs/Doxyfile*
-!docs/CMakeLists.txt
+./docs
+!./docs/Doxyfile*
+!./docs/CMakeLists.txt
