@@ -4,7 +4,7 @@ This is a demonstration of using cmake in C++ project, with features of
 - [X] unit tests
 - [X] link to external libraries (using BLAS as example)
 - [X] build executable binary and optionally static library
-- [ ] documentaion by Doxygen
+- [X] documentaion by Doxygen
 
 # Directory structure
 
@@ -14,6 +14,7 @@ Combining the following examples:
 - <https://github.com/dev-cafe/cmake-cookbook/tree/master/chapter-12/recipe-03/cxx-example>
 
 ```
+├── cmake
 ├── docs
 ├── include
 ├── src
@@ -22,9 +23,23 @@ Combining the following examples:
 └── README.md
 ```
 
+- `cmake`: cmake load files
 - `docs`: documentaion
 - `include`: the header files with signatures of public functions, used when compiling other programs against this project library.
 - `src`: source code
+- `tests`: the unit test main functions.
+
+# Build process
+
+```shell
+$ mkdir build && cd build
+$ cmake ..
+$ make
+$ make test
+$ make docs
+```
+
+The built docs will be under `build/docs/_build`. Open `html/index.html` to check the HTML documentaion.
 
 # Trouble shooting
 

@@ -1,4 +1,9 @@
-// for example see https://web.physics.utah.edu/~detar/phys6720/handouts/lapack.html
+/*!
+ @file blas.hpp
+ @brief The file contains interfaces to BLAS Fortran functions and routines
+ @see for example https://web.physics.utah.edu/~detar/phys6720/handouts/lapack.html
+ */
+#pragma once
 #ifdef __cplusplus
 extern "C" {
 #endif

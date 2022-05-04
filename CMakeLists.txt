@@ -10,6 +10,7 @@ string(REGEX MATCH ".*_version = \"[a-zA-Z0-9.-_]+" _version ${_version_stamp})
 string(REGEX REPLACE ".*_version = \"" "" _version ${_version})
 
 project(cmake_cpp_example VERSION ${_version} LANGUAGES NONE)
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 
 # Configure the C++ compiler and the flags.
 # NOTE: the C++ cmake module is named with CXX instead of CPP, otherwise will lead to error cannot find cmake module.
@@ -60,3 +61,7 @@ add_subdirectory(src)
 # Add testings
 enable_testing()
 add_subdirectory(tests)
+
+# Add docs
+include(UseDoxygenDoc)
+add_subdirectory(docs)

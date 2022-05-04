@@ -1,6 +1,11 @@
+/*!
+ @file mymath.hpp
+ @brief The file contains some mathmatical functions and routines
+ @note The symbols suffixed by `_blas` will call the related Fortran BLAS rouinte.
+ */
 #ifndef SUM_H
 
-//! compute sum up to n
+//! compute sum from 0 up to n
 int sum(int n);
 //! compute the dot product of two vectors manually
 double dot(int n, double *v1, double *v2);
