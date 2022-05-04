@@ -56,3 +56,7 @@ message(STATUS "LAPACK linking flags: ${LAPACK_LIBRARIES}")
 
 # Include the source code directory. You must have CMakeLists.txt in each subdirectory
 add_subdirectory(src)
+
+# Add testings
+enable_testing()
+add_subdirectory(tests)

@@ -1,21 +1,28 @@
 This is a demonstration of using cmake in C++ project, with features of
 
 - [X] structured directory
-- [ ] unit tests
+- [X] unit tests
 - [X] link to external libraries (using BLAS as example)
 - [X] build executable binary and optionally static library
+- [ ] documentaion by Doxygen
 
 # Directory structure
 
+Combining the following examples:
+- <https://github.com/dev-cafe/cmake-cookbook/tree/master/chapter-07/recipe-01/cxx-example>
+- <https://github.com/dev-cafe/cmake-cookbook/tree/master/chapter-12/recipe-01/cxx-example>
+- <https://github.com/dev-cafe/cmake-cookbook/tree/master/chapter-12/recipe-03/cxx-example>
+
 ```
-├── doc
+├── docs
 ├── include
 ├── src
+├── tests
 ├── CMakeLists.txt
 └── README.md
 ```
 
-- `doc`: documentaion
+- `docs`: documentaion
 - `include`: the header files with signatures of public functions, used when compiling other programs against this project library.
 - `src`: source code
 
@@ -40,8 +47,8 @@ Solution: add `-lgfortran` to link libraries
 ## `relocation R_X86_64_32 against .rodata.str1.1 can not be used when making a shared object; recompile with -fPIC`
 
 ```
-/usr/bin/ld: /HOME/local/programs/lapack-3.9.1/libblas.a(dgemv.o): relocation R_X86_64_32 against `.rodata.str1.1' can not be used when making a shared object; recompile with -fPIC
-/usr/bin/ld: /HOME/local/programs/lapack-3.9.1/libblas.a(xerbla.o): relocation R_X86_64_32S against `.rodata.str1.1' can not be used when making a shared object; recompile with -fPIC
+/usr/bin/ld: $HOME/local/programs/lapack-3.9.1/libblas.a(dgemv.o): relocation R_X86_64_32 against `.rodata.str1.1' can not be used when making a shared object; recompile with -fPIC
+/usr/bin/ld: $HOME/local/programs/lapack-3.9.1/libblas.a(xerbla.o): relocation R_X86_64_32S against `.rodata.str1.1' can not be used when making a shared object; recompile with -fPIC
 collect2: error: ld returned 1 exit status
 make[2]: *** [src/CMakeFiles/cmake_cpp_example_lib.dir/build.make:133: libcmake_cpp_example_lib.so] Error 1
 make[1]: *** [CMakeFiles/Makefile2:115: src/CMakeFiles/cmake_cpp_example_lib.dir/all] Error 2
@@ -50,6 +57,28 @@ make: *** [Makefile:103: all] Error 2
 
 Does not work with `-fPIC` or `-fPIE`.
 A quick solution is to disable the shared library.
+
+## Undefined reference when compiling test executable without library
+
+When turning off `USE_LIBRARY`,
+
+```cmake
+target_sources(test_mymath PRIVATE ${_sources})
+```
+
+where `_sources` is defined in `./src/CMakeLists.txt`. This will lead to linking error
+
+```
+/usr/bin/ld: CMakeFiles/test_mymath.dir/test_mymath.cpp.o: in function `main':
+cmake-cpp-example/tests/test_mymath.cpp:19: undefined reference to `sum(int)'
+/usr/bin/ld: cmake-cpp-example/tests/test_mymath.cpp:27: undefined reference to `dot(int, double*, double*)'
+```
+
+Solution: explicitly specify the source, by
+
+```cmake
+target_sources(test_mymath PRIVATE ../src/mymath.cpp)
+```
 
 # References
 
