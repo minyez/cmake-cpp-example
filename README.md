@@ -6,7 +6,7 @@ This is a demonstration of using cmake in C++ project, with features of
 - [X] build executable binary and optionally static library
 - [X] documentaion by Doxygen
 
-# Directory structure
+## Directory structure
 
 Combining the following examples:
 - <https://github.com/dev-cafe/cmake-cookbook/tree/master/chapter-07/recipe-01/cxx-example>
@@ -29,7 +29,7 @@ Combining the following examples:
 - `src`: source code
 - `tests`: the unit test main functions.
 
-# Build process
+## Build process
 
 ```shell
 $ mkdir build && cd build
@@ -41,9 +41,9 @@ $ make docs   # build the documentation
 
 The built docs will be under `build/docs/_build`. Open `html/index.html` to check the HTML documentaion.
 
-# Trouble shooting
+## Trouble shooting
 
-## Linking error when using BLAS/LAPCK compiled by gfortran
+### Linking error when using BLAS/LAPCK compiled by gfortran
 
 At linking stage
 
@@ -59,7 +59,7 @@ xerbla.f:(.text+0x4a): undefined reference to `_gfortran_st_write'
 
 Solution: add `-lgfortran` to link libraries
 
-## `relocation R_X86_64_32 against .rodata.str1.1 can not be used when making a shared object; recompile with -fPIC`
+### `relocation R_X86_64_32 against .rodata.str1.1 can not be used when making a shared object; recompile with -fPIC`
 
 ```
 /usr/bin/ld: $HOME/local/programs/lapack-3.9.1/libblas.a(dgemv.o): relocation R_X86_64_32 against `.rodata.str1.1' can not be used when making a shared object; recompile with -fPIC
@@ -73,7 +73,7 @@ make: *** [Makefile:103: all] Error 2
 Does not work with `-fPIC` or `-fPIE`.
 A quick solution is to disable the shared library.
 
-## Undefined reference when compiling test executable without library
+### Undefined reference when compiling test executable without library
 
 When turning off `USE_LIBRARY`,
 
@@ -95,7 +95,7 @@ Solution: explicitly specify the source, by
 target_sources(test_mymath PRIVATE ../src/mymath.cpp)
 ```
 
-# Some caveats
+## Some caveats
 
 1. Not quite platform/compiler dependent
 2. Test executables are built with target `all`, which is the default target.
@@ -108,7 +108,7 @@ target_sources(test_mymath PRIVATE ../src/mymath.cpp)
     - <https://stackoverflow.com/questions/58903269/cmake-prevent-building-test-executable-target-in-subdirectory-library-project>
     - <https://stackoverflow.com/questions/48019306/how-to-add-a-dependency-to-the-test-target-in-cmake>
 
-# References
+## References
 
 1. CMakeList.txt inside [FHI-aims](https://fhi-aims.org/) code
 2. C++ examples in [cmake cookbook](https://github.com/dev-cafe/cmake-cookbook).
