@@ -34,9 +34,9 @@ Combining the following examples:
 ```shell
 $ mkdir build && cd build
 $ cmake ..
-$ make
-$ make test
-$ make docs
+$ make        # build the main and test executable, as well as library if applied
+$ make test   # run the tests
+$ make docs   # build the documentation
 ```
 
 The built docs will be under `build/docs/_build`. Open `html/index.html` to check the HTML documentaion.
@@ -94,6 +94,19 @@ Solution: explicitly specify the source, by
 ```cmake
 target_sources(test_mymath PRIVATE ../src/mymath.cpp)
 ```
+
+# Some caveats
+
+1. Not quite platform/compiler dependent
+2. Test executables are built with target `all`, which is the default target.
+    Ideally, test executables should be build when trying to run the test, i.e. `make test`. However in cmake, this will
+    run the test without building them.
+
+    The following discussions may be useful for behavior change if demanded in the future
+    - <https://stackoverflow.com/questions/733475/cmake-ctest-make-test-doesnt-build-tests>
+    - <https://stackoverflow.com/questions/52524480/cmake-target-test-doesnt-build-tests-target-all-does>
+    - <https://stackoverflow.com/questions/58903269/cmake-prevent-building-test-executable-target-in-subdirectory-library-project>
+    - <https://stackoverflow.com/questions/48019306/how-to-add-a-dependency-to-the-test-target-in-cmake>
 
 # References
 
